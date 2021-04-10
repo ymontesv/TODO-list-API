@@ -33,6 +33,20 @@ export function Home() {
 			});
 	};
 
+	const deleteAPI = () => {
+		fetch(LinkAPI, {
+			method: "Delete",
+			headers: { "Content-Type": "application/json" }
+		})
+			.then(res => res.json())
+			.then(data => {
+				//console.log("updateTodo", data);
+				CallAPI(lista);
+				alert(data.result);
+			}) //cargando la
+			.catch(error => console.error("Error:", error.message));
+	};
+
 	return (
 		<div className="container mt-5 text-center">
 			<div className="row d-flex justify-content-center">
@@ -101,12 +115,20 @@ export function Home() {
 										);
 								  })}
 						</div>
-						<button
-							type="button"
-							className="btn btn-primary"
-							onClick={() => putAPI(lista)}>
-							Save
-						</button>
+						<div className="row d-flex justify-content-center">
+							<button
+								type="button"
+								className="btn btn-primary"
+								onClick={() => putAPI(lista)}>
+								Save
+							</button>
+							<button
+								type="button"
+								className="btn btn-primary"
+								onClick={() => deleteAPI()}>
+								Delete
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>
